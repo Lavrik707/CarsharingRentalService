@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VehicleRentalService.Models;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace VehicleRentalService.Models
@@ -52,6 +53,17 @@ namespace VehicleRentalService.Models
                         MaxFuel = 70,
                         CurrentFuel = 70,
                         Transmission = TransmissionType.CVT
+                    },
+                    new Car
+                    {
+                        Name = "Daewoo Matiz",
+                        Description = "Best car of the World",
+                        PricePerMinute = 10.00m,
+                        IsAvailable = true,
+                        Location = "Lisna 7, 10001 Zhytomyr",
+                        MaxFuel = 70,
+                        CurrentFuel = 70,
+                        Transmission = TransmissionType.Automatic
                     }
                 );
             }
