@@ -1,12 +1,28 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width" />
-	<title>SportsStore</title>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - VehicleRentalService</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-	<div>
-		@RenderBody()
-	</div>
+    <header class="bg-dark text-white p-3">
+        <div class="container">
+            <h1>Vehicle Rental Service</h1>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-light text-center p-3">
+        <div class="container">
+            &copy; 2025 Vehicle Rental Service
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
