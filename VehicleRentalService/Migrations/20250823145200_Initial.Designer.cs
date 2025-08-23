@@ -12,7 +12,7 @@ using VehicleRentalService.Models;
 namespace VehicleRentalService.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    [Migration("20250820120503_Initial")]
+    [Migration("20250823145200_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

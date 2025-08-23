@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace VehicleRentalService.Models
 {
-    public class Scooter:Vehicle
+    public class Scooter : Vehicle
     {
         private int _charge;
 
