@@ -1,0 +1,36 @@
+﻿@model string[]
+
+<div class="container mt-5">
+    @for (int i = 0; i < Model.Length; i++)
+    {
+        var activeClass = Model[i] == (string)ViewData["CurrentCategory"] ? "active" : "";
+        <a href="/Home/Index?category=@Model[i]" style="text-decoration: none;">
+            <div class="clickable-block @activeClass">
+                @Model[i]
+            </div>
+        </a>
+    }
+</div>
+
+<style>
+    .clickable-block {
+        background-color: white;
+        color: black;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+        .clickable-block.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+    a {
+        color: inherit;
+    }
+</style>
