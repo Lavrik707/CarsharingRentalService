@@ -1,0 +1,24 @@
+﻿@model VehicleRentalService.Models.ViewModels.CartViewModel
+
+<link rel="stylesheet" href="@Url.Content("~/css/shopping-cart-styles.css")" />
+@{
+	@foreach (var v in Model.Items)
+	{
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">@v.VehicleName</h5>
+				<div class="d-flex justify-content-between align-items-center">
+					<span class="h5 mb-0">@v.PricePerMinute/minute</span>
+				</div>
+			</div>
+			<div class="card-footer d-flex justify-content-between bg-light">
+				<span>@v.Quantity</span>
+				<form asp-controller="ShoppingCart" asp-action="RemoveCookies" method="post">
+					<input type="hidden" name="VehicleType" value="@v.VehicleType" />
+					<input type="hidden" name="Id" value="@v.Id" />
+					<button class="btn btn-primary btn-sm" name="remove-btn" type="submit">Remove</button>
+				</form>
+			</div>
+		</div>
+	}
+}

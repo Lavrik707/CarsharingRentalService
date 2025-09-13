@@ -7,5 +7,7 @@
         IQueryable<Scooter> Scooters { get; }
         IQueryable<Trip> Trips { get; }
         IQueryable<News> News { get; }
+
+        Vehicle? FindById(VehicleType vehicleType, long id);
     }
 }
