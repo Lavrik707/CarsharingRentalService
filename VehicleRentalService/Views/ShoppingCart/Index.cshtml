@@ -22,3 +22,15 @@
 		</div>
 	}
 }
+
+<form method="post" asp-controller="Orders" asp-action="PlaceOrder" id="orderForm">
+	<div class="mb-3">
+		<label for="TripStart">Start Time</label>
+		<input type="datetime-local" id="TripStart" name="TripBegin" value="@Model.TripBegin.ToString("yyyy-MM-ddTHH:mm")" class="form-control" />
+	</div>
+	<div class="mb-3">
+		<label for="TripEnd">End Time</label>
+		<input type="datetime-local" id="TripEnd" name="TripEnd" value="@Model.TripEnd.ToString("yyyy-MM-ddTHH:mm")" class="form-control" />
+	</div>
+	<button class="btn btn-primary btn-lg" type="submit">Place Order</button>
+</form>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -35,7 +36,10 @@ namespace VehicleRentalService.Controllers
 
                 _ => 0
             };
+            
+            #if DEBUG
             Console.WriteLine($"Items count:{totalItems}");
+            #endif
 
             var vehicles = category switch
             {
