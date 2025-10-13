@@ -1,0 +1,74 @@
+﻿@model VehicleRentalService.Models.ViewModels.VehicleCreateViewModel
+
+@if (TempData["FormErrors"] != null)
+{
+    <div class="alert alert-danger">@TempData["FormErrors"]</div>
+}
+
+<form asp-controller="Home" asp-action="AddVehicle" method="post">
+    <input asp-for="Name" placeholder="Vehicle Name" required />
+    <input asp-for="Description" placeholder="Vehicle Description" />
+    <input asp-for="PricePerHour" type="number" step="0.01" min="0.01" max="10000" required />
+    <input type="hidden" asp-for="IsAvailable" value="true" />
+
+    <div>
+        <input asp-for="VehicleType" name="VehicleType" id="vt1" type="radio" value="Car" checked /> Car
+        <input asp-for="VehicleType" name="VehicleType" id="vt2" type="radio" value="Bike" /> Bike
+        <input asp-for="VehicleType" name="VehicleType" id="vt3" type="radio" value="Scooter" /> Scooter
+    </div>
+
+    <div id="car-fields" style="display:none">
+        <input asp-for="MaxFuel" type="number" placeholder="Fuel capacity" />
+        <select asp-for="Transmission">
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+            <option value="CVT">CVT</option>
+            <option value="SemiAutomatic">SemiAutomatic</option>
+        </select>
+        <input asp-for="CurrentFuel" type="hidden" value="100" />
+    </div>
+
+    <div id="bike-fields" style="display:none"></div>
+    <div id="scooter-fields" style="display:none">
+        <input asp-for="Charge" type="hidden" value="100" />
+    </div>
+
+    <button type="submit">Add Vehicle</button>
+</form>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const maxFuelInput = document.getElementById('MaxFuel');
+        const currentFuelInput = document.getElementById('CurrentFuel');
+
+        if (maxFuelInput && currentFuelInput) {
+            maxFuelInput.addEventListener('input', () => {
+                const value = parseFloat(maxFuelInput.value);
+                currentFuelInput.value = isNaN(value) ? 0 : value;
+            });
+        }
+
+        const radios = document.querySelectorAll('input[name="VehicleType"]');
+        const sections = {
+            Car: document.getElementById('car-fields'),
+            Bike: document.getElementById('bike-fields'),
+            Scooter: document.getElementById('scooter-fields')
+        };
+
+        function updateFields() {
+            const selected = document.querySelector('input[name="VehicleType"]:checked').value;
+            for (const key in sections) {
+                sections[key].style.display = (key === selected) ? 'block' : 'none';
+            }
+        }
+
+        radios.forEach(radio => {
+            radio.addEventListener('change', updateFields);
+        });
+
+        updateFields();
+    });
+</script>

@@ -1,4 +1,6 @@
-﻿namespace VehicleRentalService.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace VehicleRentalService.Models
 {
     public class EFServiceRepository : IServiceRepository
     {
@@ -7,12 +9,29 @@
         {
             context = ctx;
         }
-        public IQueryable<Car> Cars => context.Cars;
-        public IQueryable<Bike> Bikes => context.Bikes;
-        public IQueryable<Scooter> Scooters => context.Scooters;
-        public IQueryable<News> News => context.News;
-        public IQueryable<Trip> Trips => context.Trips;
-
+        public IQueryable<T> GetAll<T>() where T : class
+        {
+            return context.Set<T>();
+        }
+        public T? GetById<T>(long id) where T : class
+        {
+            return context.Set<T>().Find(id);
+        }
+        public void Create<T>(T entity) where T : class
+        {
+            context.Set<T>().Add(entity);
+            context.SaveChanges();
+        }
+        public void Update<T>(T entity) where T : class
+        {
+            context.Set<T>().Update(entity);
+            context.SaveChanges();
+        }
+        public void Delete<T>(T entity) where T : class
+        {
+            context.Set<T>().Remove(entity);
+            context.SaveChanges();
+        }
         public Vehicle? FindById(VehicleType vehicleType, long id)
         {
             Vehicle vehicle = null;
@@ -33,6 +52,11 @@
             }
 
             return vehicle;
+        }
+
+        public async Task<Vehicle?> FindByIdAsync(long id)
+        {
+            return await context.Vehicles.FirstOrDefaultAsync(v => v.VehicleId == id);
         }
     }
 }

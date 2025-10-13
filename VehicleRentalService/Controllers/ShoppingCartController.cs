@@ -56,8 +56,8 @@ namespace VehicleRentalService.Controllers
                         VehicleName = vehicle?.Name ?? "Unknown",
                         VehicleType = item.VehicleType,
                         Quantity = item.Quantity,
-                        PricePerMinute = vehicle?.PricePerMinute ?? 0,
-                        Subtotal = (vehicle?.PricePerMinute ?? 0) * (decimal)shoppingCart.Duration.TotalMinutes * item.Quantity
+                        PricePerHour = vehicle?.PricePerHour ?? 0,
+                        Subtotal = (vehicle?.PricePerHour ?? 0) * (decimal)shoppingCart.Duration.TotalMinutes * item.Quantity
                     };
                 }).ToList()
             };

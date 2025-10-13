@@ -23,24 +23,16 @@ namespace VehicleRentalService.Models
 
             foreach (var item in CartItems)
             {
-                switch (item.VehicleType)
+                vehicle = item.VehicleType switch
                 {
-                    case VehicleType.Car:
-                        vehicle = _vehicleRepository.Cars.FirstOrDefault(c => c.VehicleId == item.Id);
-                        break;
-                    case VehicleType.Bike:
-                        vehicle = _vehicleRepository.Cars.FirstOrDefault(c => c.VehicleId == item.Id);
-                        break;
-                    case VehicleType.Scooter:
-                        vehicle = _vehicleRepository.Cars.FirstOrDefault(c => c.VehicleId == item.Id);
-                        break;
-                    default:
-                        throw new NotImplementedException();
-
-                }
+                    VehicleType.Car => _vehicleRepository.GetAll<Car>().FirstOrDefault(c => c.VehicleId == item.Id),
+                    VehicleType.Bike => _vehicleRepository.GetAll<Bike>().FirstOrDefault(b => b.VehicleId == item.Id),
+                    VehicleType.Scooter => _vehicleRepository.GetAll<Scooter>().FirstOrDefault(s => s.VehicleId == item.Id),
+                    _ => throw new NotImplementedException()
+                };
                 if (vehicle != null)
                 {
-                    total += vehicle.PricePerMinute * (decimal)Duration.TotalMinutes * item.Quantity;
+                    total += vehicle.PricePerHour * (decimal)Duration.TotalMinutes * item.Quantity;
                 }
             }
             return total;

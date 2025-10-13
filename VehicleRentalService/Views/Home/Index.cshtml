@@ -1,6 +1,18 @@
-﻿@section Sidebar {
+﻿@model VehicleRentalService.Models.ViewModels.VehicleListViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Sidebar {
     <aside class="col-md-3 col-lg-2 bg-light border-end min-vh-100 p-3">
         @await Component.InvokeAsync("NavigationMenu")
+    </aside>
+}
+
+@section AdminVehiclePanel {
+    <aside class="col-md-2 col-lg-2 bg-light border-start min-vh-100 p-3 d-none d-md-block">
+        @await Component.InvokeAsync("AdminVehiclePanel")
     </aside>
 }
 

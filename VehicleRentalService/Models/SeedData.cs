@@ -25,7 +25,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Toyota Corolla",
                         Description = "Reliable compact car",
-                        PricePerMinute = 0.50m,
+                        PricePerHour = 0.50m,
                         IsAvailable = true,
                         Location = "Shevchenko St 12, 10000 Zhytomyr",
                         MaxFuel = 50,
@@ -36,7 +36,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Ford Mustang",
                         Description = "Sporty coupe",
-                        PricePerMinute = 1.20m,
+                        PricePerHour = 1.20m,
                         IsAvailable = true,
                         Location = "Khmelnytskyi St 45, 10001 Zhytomyr",
                         MaxFuel = 60,
@@ -47,7 +47,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Tesla Model 3",
                         Description = "Electric sedan",
-                        PricePerMinute = 2.00m,
+                        PricePerHour = 2.00m,
                         IsAvailable = true,
                         Location = "Kotsiubynskoho St 1, 10002 Zhytomyr",
                         MaxFuel = 70,
@@ -58,7 +58,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Daewoo Matiz",
                         Description = "Best car of the World",
-                        PricePerMinute = 10.00m,
+                        PricePerHour = 10.00m,
                         IsAvailable = true,
                         Location = "Lisna 7, 10001 Zhytomyr",
                         MaxFuel = 70,
@@ -76,7 +76,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Mountain Bike",
                         Description = "Off-road bike",
-                        PricePerMinute = 0.15m,
+                        PricePerHour = 0.15m,
                         IsAvailable = true,
                         Location = "Sadova St 7, 10003 Zhytomyr"
                     },
@@ -84,7 +84,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "City Bike",
                         Description = "Comfortable urban bike",
-                        PricePerMinute = 0.10m,
+                        PricePerHour = 0.10m,
                         IsAvailable = true,
                         Location = "Bohdana Khmelnytskoho St 10, 10004 Zhytomyr"
                     },
@@ -92,7 +92,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Racing Bike",
                         Description = "Lightweight bike for speed",
-                        PricePerMinute = 0.25m,
+                        PricePerHour = 0.25m,
                         IsAvailable = true,
                         Location = "Akademichna St 3, 10005 Zhytomyr"
                     }
@@ -107,7 +107,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Xiaomi M365",
                         Description = "Electric scooter",
-                        PricePerMinute = 0.30m,
+                        PricePerHour = 0.30m,
                         IsAvailable = true,
                         Location = "Tupikova St 18, 10006 Zhytomyr",
                         Charge = 90
@@ -116,7 +116,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Segway Ninebot",
                         Description = "Self-balancing scooter",
-                        PricePerMinute = 0.35m,
+                        PricePerHour = 0.35m,
                         IsAvailable = true,
                         Location = "Svobody St 22, 10007 Zhytomyr",
                         Charge = 75
@@ -125,7 +125,7 @@ namespace VehicleRentalService.Models
                     {
                         Name = "Boosted Rev",
                         Description = "High-performance electric scooter",
-                        PricePerMinute = 0.50m,
+                        PricePerHour = 0.50m,
                         IsAvailable = true,
                         Location = "Mira St 99, 10008 Zhytomyr",
                         Charge = 100

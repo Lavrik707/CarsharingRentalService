@@ -34,7 +34,7 @@ namespace VehicleRentalService.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PricePerMinute = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
+                    PricePerHour = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),

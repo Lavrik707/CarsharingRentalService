@@ -21,44 +21,42 @@ namespace VehicleRentalService.Controllers
             _repository = repo;
         }
 
-        public IActionResult Index(string category ="Car", int page = 1)
+        public IActionResult Index(string category = "Car", int page = 1)
         {
             ViewData["CurrentCategory"] = category;
 
 
             var totalItems = category switch
             {
-                "Car" => _repository.Cars.Count(),
-
-                "Bike" => _repository.Bikes.Count(),
-
-                "Scooter" => _repository.Scooters.Count(),
-
+                "Car" => _repository.GetAll<Car>().Count(),
+                "Bike" => _repository.GetAll<Bike>().Count(),
+                "Scooter" => _repository.GetAll<Scooter>().Count(),
                 _ => 0
             };
-            
-            #if DEBUG
+
+#if DEBUG
             Console.WriteLine($"Items count:{totalItems}");
-            #endif
+#endif
 
             var vehicles = category switch
             {
-                "Car" => _repository.Cars
-                .Cast<Vehicle>()
-                .OrderBy(v => v.VehicleId)
-                .Skip((page - 1) * _pageSize)
-                .Take(_pageSize),
+                "Car" => _repository.GetAll<Car>()
+                    .Cast<Vehicle>()
+                    .OrderBy(v => v.VehicleId)
+                    .Skip((page - 1) * _pageSize)
+                    .Take(_pageSize),
 
-                "Bike" => _repository.Bikes
-                .Cast<Vehicle>()
-                .OrderBy(v => v.VehicleId)
-                .Skip((page - 1) * _pageSize)
-                .Take(_pageSize),
+                "Bike" => _repository.GetAll<Bike>()
+                    .Cast<Vehicle>()
+                    .OrderBy(v => v.VehicleId)
+                    .Skip((page - 1) * _pageSize)
+                    .Take(_pageSize),
 
-                "Scooter" => _repository.Scooters.Cast<Vehicle>()
-                 .OrderBy(v => v.VehicleId)
-                 .Skip((page - 1) * _pageSize)
-                 .Take(_pageSize),
+                "Scooter" => _repository.GetAll<Scooter>()
+                    .Cast<Vehicle>()
+                    .OrderBy(v => v.VehicleId)
+                    .Skip((page - 1) * _pageSize)
+                    .Take(_pageSize),
 
                 _ => Enumerable.Empty<Vehicle>()
             };
@@ -104,6 +102,94 @@ namespace VehicleRentalService.Controllers
             HttpContext.Session.SetString("cart", JsonSerializer.Serialize(cart));
 
             return RedirectToAction("Index", new { category = model.VehicleType.ToString() });
+        }
+
+        //maybe....
+        //[HttpPost]
+        //public void CreateVehicle(string Name, string Description,  decimal PricePerHour, bool IsAvailable,
+        //    string VehicleType, double? MaxFuel, TransmissionType? Transmission, double? CurrentFuel, double? Charge)
+        //{
+
+        //}
+
+
+        [HttpPost]
+        public IActionResult AddVehicle(VehicleCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Validation failed. Please check your input.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            Vehicle vehicle;
+
+            switch (model.VehicleType)
+            {
+                case "Car":
+                    if (!model.MaxFuel.HasValue || !model.CurrentFuel.HasValue || !model.Transmission.HasValue)
+                    {
+                        TempData["Error"] = "All fields for Car are required.";
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                    vehicle = new Car
+                    {
+                        Name = model.Name,
+                        Description = model.Description,
+                        PricePerHour = model.PricePerHour,
+                        IsAvailable = model.IsAvailable,
+                        MaxFuel = model.MaxFuel.Value,
+                        CurrentFuel = model.CurrentFuel.Value,
+                        Transmission = model.Transmission.Value
+                    };
+                    break;
+
+                case "Bike":
+                    vehicle = new Bike
+                    {
+                        Name = model.Name,
+                        Description = model.Description,
+                        PricePerHour = model.PricePerHour,
+                        IsAvailable = model.IsAvailable
+                    };
+                    break;
+
+                case "Scooter":
+                    vehicle = new Scooter
+                    {
+                        Name = model.Name,
+                        Description = model.Description,
+                        PricePerHour = model.PricePerHour,
+                        IsAvailable = model.IsAvailable,
+                        Charge = model.Charge ?? 100
+                    };
+                    break;
+
+                default:
+                    TempData["Error"] = "Unknown vehicle type.";
+                    return RedirectToAction("Index", "Home");
+            }
+
+            _repository.Create(vehicle);
+            TempData["Success"] = $"Vehicle '{vehicle.Name}' successfully created.";
+
+            Console.WriteLine($"Created vehicle: {vehicle.Name}, Type: {model.VehicleType}");
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public async Task<IActionResult> DeleteVehicle(long id)
+        {
+            var vehicle = await _repository.FindByIdAsync(id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            _repository.Delete(vehicle);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

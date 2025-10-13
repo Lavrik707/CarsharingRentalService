@@ -1,37 +1,48 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<title>@ViewData["Title"] VehicleRentalService</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/layouts.css" />
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - VehicleRentalService</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/layouts.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-	<header class="bg-dark text-white p-3">
-		<div class="container">
-			<a class="logo" href="/">Vehicle Rental Service</a>
-			<a class="shopping-cart-link" href="/ShoppingCart">
-				<img src="~/images/shopping-cart.png" class="shopping-cart-logo" />
-			</a>
-		</div>
-	</header>
+    <header class="bg-dark text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="logo text-white" href="/">Vehicle Rental Service</a>
+            <a class="shopping-cart-link" href="/ShoppingCart">
+                <img src="~/images/shopping-cart.png" class="shopping-cart-logo" />
+            </a>
+        </div>
+    </header>
 
-	<div class="container-fluid flex-grow-1">
-		<div class="row">
-			@RenderSection("Sidebar", required: false)
+    <div class="container-fluid flex-grow-1">
+        <div class="row">
+            @* Left Nav Panel *@
+            @RenderSection("Sidebar", required: false)
 
-			<main class="col-md-9 col-lg-10 p-4">
-				@RenderBody()
-			</main>
-		</div>
-	</div>
+            @* VehiclesSummary *@
+            <main class="col p-4">
+                @RenderBody()
+            </main>
 
-	<footer class="bg-light text-center p-3 mt-auto">
-		<div class="container">
-			&copy; 2025 Vehicle Rental Service
-		</div>
-	</footer>
+            @* Admin Panel right *@
+            @if (IsSectionDefined("AdminVehiclePanel"))
+            {
+                @RenderSection("AdminVehiclePanel")
+            }
+        </div>
+    </div>
 
-	<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <footer class="bg-light text-center p-3 mt-auto">
+        <div class="container">
+            &copy; 2025 Vehicle Rental Service
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

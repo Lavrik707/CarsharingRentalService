@@ -10,6 +10,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ServiceDbContext>(opts =>
 {
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:VehicleRentalServiceConnection"]);
+    opts.EnableSensitiveDataLogging();
+    opts.LogTo(Console.WriteLine, LogLevel.Information);
 });
 
 builder.Services.AddScoped<IServiceRepository, EFServiceRepository>();

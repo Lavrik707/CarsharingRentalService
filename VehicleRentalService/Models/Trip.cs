@@ -35,10 +35,10 @@ namespace VehicleRentalService.Models
             get
             {
                 if (Vehicle == null)
-                    throw new InvalidOperationException("Vehicle is not loaded. Please use include during the request"); //юзать инклюд
+                    throw new InvalidOperationException("Vehicle is not loaded. Please use include during the request"); //i beg you use include
 
                 var minutes = (decimal)Duration.TotalMinutes;
-                return Math.Round(minutes * Vehicle.PricePerMinute, 2);
+                return Math.Round(minutes * Vehicle.PricePerHour, 2);
             }
         }
 

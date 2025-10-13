@@ -99,7 +99,7 @@ namespace VehicleRentalService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("PricePerMinute")
+                    b.Property<decimal>("PricePerHour")
                         .HasColumnType("decimal(8, 2)");
 
                     b.HasKey("VehicleId");
