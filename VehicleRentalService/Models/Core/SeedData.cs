@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VehicleRentalService.Models;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace VehicleRentalService.Models
+namespace VehicleRentalService.Models.Core
 {
     public static class SeedData
     {

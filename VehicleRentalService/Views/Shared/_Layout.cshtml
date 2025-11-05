@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,6 +19,17 @@
             <a class="shopping-cart-link" href="/ShoppingCart">
                 <img src="~/images/shopping-cart.png" class="shopping-cart-logo" />
             </a>
+            @if (!SignInManager.IsSignedIn(User)){
+                <a class="account-link" asp-controller="Account" asp-action="Register">
+                    <img src="~/images/account.png" class="account-logo" />  
+                </a>
+            }
+            else
+            {
+                <a class="account-link" asp-controller="Account" asp-action="Overview">
+                    <img src="~/images/account.png" class="account-logo" />
+                </a>
+            }
         </div>
     </header>
 
@@ -23,6 +37,7 @@
         <div class="row">
             @* Left Nav Panel *@
             @RenderSection("Sidebar", required: false)
+            @RenderSection("Scripts", required: false)
 
             @* VehiclesSummary *@
             <main class="col p-4">

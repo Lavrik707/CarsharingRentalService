@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VehicleRentalService.Models;
+using VehicleRentalService.Models.Core;
 
 namespace VehicleRentalService.Controllers
 {

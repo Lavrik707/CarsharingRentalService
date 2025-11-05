@@ -1,4 +1,4 @@
-﻿namespace VehicleRentalService.Models
+﻿namespace VehicleRentalService.Models.Core
 {
     public interface IServiceRepository
     {

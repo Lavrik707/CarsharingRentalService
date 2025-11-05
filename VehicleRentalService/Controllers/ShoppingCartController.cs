@@ -3,6 +3,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using VehicleRentalService.Models;
+using VehicleRentalService.Models.Core;
 using VehicleRentalService.Models.ViewModels;
 
 namespace VehicleRentalService.Controllers
