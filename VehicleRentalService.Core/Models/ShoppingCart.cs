@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using VehicleRentalService.Models.Core;
 
 namespace VehicleRentalService.Models
 {

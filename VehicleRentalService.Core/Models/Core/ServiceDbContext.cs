@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace VehicleRentalService.Models
+namespace VehicleRentalService.Models.Core
 {
     public class ServiceDbContext : DbContext
     {

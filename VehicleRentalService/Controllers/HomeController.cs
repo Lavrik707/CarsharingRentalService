@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
 using VehicleRentalService.Models;
+using VehicleRentalService.Models.Core;
 using VehicleRentalService.Models.ViewModels;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
